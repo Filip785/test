@@ -29,7 +29,7 @@ class Table
         $insertStr = TableHelpers::getInsertStr($args);
         $query = self::$pdo->prepare("INSERT INTO `" . $this->tableName . "` $insertStr");
 
-        $query->execute(['filip785','filip7851', 'filip7852']);
+        $query->execute(array_values($args));
     }
 
     public static function setPDO($pdo)

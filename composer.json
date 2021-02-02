@@ -1,0 +1,18 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Filip785\\MVC\\": "src"
+        }
+    },
+    "name": "filip785/citrus-systems-task",
+    "authors": [
+        {
+            "name": "Filip785",
+            "email": "fdjuricic98@gmail.com"
+        }
+    ],
+    "require": {
+        "nikic/fast-route": "^1.3",
+        "larapack/dd": "1.*"
+    }
+}

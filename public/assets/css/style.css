@@ -38,3 +38,8 @@ html, body {
 .product.product-view .back-home {
     margin-bottom: 5px;
 }
+
+.comments-form {
+    display: flex;
+    justify-content: center;
+}

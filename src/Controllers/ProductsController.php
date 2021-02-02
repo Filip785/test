@@ -15,6 +15,10 @@ class ProductsController extends BaseController
         $this->setViewVar('title', 'Showing all products');
         $this->setViewVar('allProducts', $allProducts);
 
+        if ($this->hasErrors()) {
+            $this->setViewVar('commentErrors', $this->getErrors());
+        }
+
         $this->render();
     }
 

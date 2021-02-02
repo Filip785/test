@@ -12,12 +12,11 @@ DatabaseLoader::loadDB($dir . '/src/config/database.php');
 $pdoInstance = DB::getInstance();
 
 $tableDrop = $pdoInstance->prepare('DROP TABLE IF EXISTS `products`');
-$tableDrop->execute();
 
 if($tableDrop->execute()) {
     echo 'Products table dropped.' . PHP_EOL;
 } else {
-    echo 'Failed to drop procuts table.' . PHP_EOL;
+    echo 'Failed to drop products table.' . PHP_EOL;
 }
 
 $tableCreation = $pdoInstance->prepare('CREATE TABLE `products` (
@@ -32,6 +31,29 @@ if($tableCreation->execute()) {
     echo 'Products table created.' . PHP_EOL;
 } else {
     echo 'Failed to create products table.' . PHP_EOL;
+}
+
+$tableDropComments = $pdoInstance->prepare('DROP TABLE IF EXISTS `comments`');
+
+if($tableDropComments->execute()) {
+    echo 'Comments table dropped.' . PHP_EOL;
+} else {
+    echo 'Failed to drop comments table.' . PHP_EOL;
+}
+
+$tableCreationComments = $pdoInstance->prepare('CREATE TABLE `comments` (
+    `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` varchar(255) NOT NULL,
+    `email` varchar(255) NOT NULL,
+    `is_allowed` int(11) NOT NULL DEFAULT 0,
+    `message` varchar(255) NOT NULL
+  )
+');
+
+if($tableCreationComments->execute()) {
+    echo 'Comments table created.' . PHP_EOL;
+} else {
+    echo 'Failed to create comments table.' . PHP_EOL;
 }
 
 DB::table('products')->create(['image' => '/assets/images/citrus1.jpg', 'title' => 'Citrus Juice 1', 'description' => 'Very nice citrus juice 1!']);

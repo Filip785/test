@@ -54,4 +54,18 @@ abstract class BaseController
     {
         header("Location: $path");
     }
+
+    protected function hasErrors()
+    {
+        session_start();
+        return isset($_SESSION['errors']);
+    }
+
+    protected function getErrors()
+    {
+        $errors = $_SESSION['errors'];
+        session_destroy();
+
+        return $errors;
+    }
 }

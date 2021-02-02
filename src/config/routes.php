@@ -6,6 +6,8 @@ use FastRoute\RouteCollector;
 $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->addRoute('GET', '/', 'HomeController@index');
 
+    $r->addRoute('POST', '/comments/create', 'CommentsController@create');
+
     // list all products
     $r->addRoute('GET', '/products', 'ProductsController@index');
     // get single product
@@ -53,8 +55,7 @@ switch ($routeInfo[0]) {
         $fullNamespaceName = "Filip785\\MVC\\Controllers\\" . $className;
 
         if (!class_exists($fullNamespaceName)) {
-            dd('Your controller class does not exist. Please provide it in src/Controllers/ 
-                and use the following namespace to define it in: Filip785\\MVC\\Controllers.');
+            dd('Your controller class does not exist. Please provide it in src/Controllers/ and use the following namespace to define it in: Filip785\\MVC\\Controllers.');
         }
 
         $actionMethod = $handlerParams[1];

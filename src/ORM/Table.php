@@ -32,6 +32,27 @@ class Table
         $query->execute(array_values($args));
     }
 
+    public function where($args)
+    {
+        $whereStr = TableHelpers::getWhereStr($args);
+        $query = self::$pdo->prepare("SELECT * FROM `" . $this->tableName . "` WHERE $whereStr");
+        $query->execute(array_values($args));
+
+        $result = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    public function get($id)
+    {
+        $query = self::$pdo->prepare("SELECT * FROM `" . $this->tableName . "` WHERE id = ?");
+        $query->execute([$id]);
+
+        $result = $query->fetch(\PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
     public static function setPDO($pdo)
     {
         if (self::$pdo) {

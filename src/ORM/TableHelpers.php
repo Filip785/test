@@ -24,4 +24,19 @@ class TableHelpers
 
         return "$propNames VALUES $valueQuestions";
     }
+
+    public static function getWhereStr($args)
+    {
+        $statement = '';
+
+        foreach ($args as $k => $arg) {
+            $statement .= $k . ' = ?';
+
+            if (!($k === array_key_last($args))) {
+                $statement .= ' AND ';
+            }
+        }
+
+        return $statement;
+    }
 }

@@ -10,19 +10,20 @@ class ProductsController extends BaseController
 {
     public function index()
     {
+        $allProducts = array_chunk(DB::table('products')->all(), 3);
+
         $this->setViewVar('title', 'Showing all products');
-
-        $model = new Product();
-        $model->create(['image' => '/img/img2.jpg', 'title' => 'citrus juice', 'description' => 'citrus juice 2 desc']);
-
-        $allProducts = DB::table('products')->all();
+        $this->setViewVar('allProducts', $allProducts);
 
         $this->render();
     }
 
     public function get(int $product_id)
     {
-        $this->setViewVar('id', $product_id);
+        $product = DB::table('products')->get($product_id);
+
+        $this->setViewVar('product', $product);
+
         $this->render();
     }
 }

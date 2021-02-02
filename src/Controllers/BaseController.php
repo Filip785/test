@@ -27,7 +27,7 @@ abstract class BaseController
         return ob_get_clean();
     }
 
-    protected function setViewVar(string $varName, string $varVal)
+    protected function setViewVar(string $varName, $varVal)
     {
         $this->viewVars[$varName] = $varVal;
     }

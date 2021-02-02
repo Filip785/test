@@ -1,4 +1,5 @@
 <?php
+
 use Filip785\MVC\Loaders\RoutingLoader;
 
 $dir = dirname(__DIR__);

@@ -1,0 +1,1 @@
+<h1>Getting product with id: <?= $id ?></h1>

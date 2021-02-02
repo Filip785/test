@@ -1,8 +1,18 @@
 <?php
 namespace Filip785\MVC\Controllers;
 
-class ProductsController {
+use Filip785\MVC\Controllers\BaseController;
+
+class ProductsController extends BaseController {
     public function index() {
-        echo 'calling products controller';
+        $this->setViewVar('title', 'Showing all products');
+
+        $this->render();
+    }
+
+    public function get(int $product_id) {
+        $this->setViewVar('id', $product_id);
+
+        $this->render();
     }
 }

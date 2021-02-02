@@ -4,7 +4,11 @@ use FastRoute\RouteCollector;
 
 $dispatcher = FastRoute\simpleDispatcher(function(RouteCollector $r) {
     $r->addRoute('GET', '/', 'HomeController@index');
+
+    // list all products
     $r->addRoute('GET', '/products', 'ProductsController@index');
+    // get single product
+    $r->addRoute('GET', '/products/{product_id:\d+}', 'ProductsController@get');
 });
 
 // Fetch method and URI from somewhere
@@ -47,21 +51,21 @@ switch ($routeInfo[0]) {
             dd('Please enter your action pattern in the following format: SomeController@index.');        
         }
 
-        $fullNamespaceName = "Filip785\\MVC\\Controllers\\".$handlerParams[0];
+        $className = $handlerParams[0];
+        $fullNamespaceName = "Filip785\\MVC\\Controllers\\".$className;
 
         if(!class_exists($fullNamespaceName)) {
             dd('Your controller class does not exist. Please provide it in src/Controllers/ and use the following namespace to define it in: Filip785\\MVC\\Controllers.');
         }
 
-        $class = new $fullNamespaceName();
-
         $actionMethod = $handlerParams[1];
 
-        if(!method_exists($class, $actionMethod)) {
+        if(!method_exists($fullNamespaceName, $actionMethod)) {
             dd("Action '$actionMethod' does not exist in $fullNamespaceName. Please create it.");
         }
 
-        $class->$actionMethod();
+        $class = new $fullNamespaceName($className, $actionMethod);
+        $class->$actionMethod(...$vars);
         
         break;
 }

@@ -39,7 +39,12 @@ html, body {
     margin-bottom: 5px;
 }
 
-.comments-form {
+.comments-form, .comments {
     display: flex;
     justify-content: center;
+}
+
+.comments {
+    flex-direction: column;
+    align-items: center;
 }

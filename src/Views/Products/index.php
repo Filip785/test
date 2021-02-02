@@ -14,12 +14,22 @@
     <?php } ?>
 </div>
 
+<div class="comments">
+    <?php foreach($allComments as $comment) { ?>
+        <div class="comment">
+            <h2>Comment From: <?= $comment['name'] ?></h2>
+            <p>Email: <?= $comment['email'] ?></p>
+            <p>Message: <?= $comment['message'] ?></p>
+        </div>
+    <?php } ?>
+</div>
+
 <div class="comments-form">
     <form method="POST" action="/comments/create">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name">
-            <?php 
+            <?php
                 if(isset($commentErrors) && isset($commentErrors['name'])) {
             ?>
                 <div class="error-container">

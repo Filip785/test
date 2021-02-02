@@ -11,9 +11,11 @@ class ProductsController extends BaseController
     public function index()
     {
         $allProducts = array_chunk(DB::table('products')->all(), 3);
+        $allComments = DB::table('comments')->where(['is_allowed' => 1]);
 
         $this->setViewVar('title', 'Showing all products');
         $this->setViewVar('allProducts', $allProducts);
+        $this->setViewVar('allComments', $allComments);
 
         if ($this->hasErrors()) {
             $this->setViewVar('commentErrors', $this->getErrors());

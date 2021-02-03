@@ -8,7 +8,6 @@ class HomeController extends BaseController
 {
     public function index()
     {
-        // redirect to products for now
         $this->redirect('/products');
     }
 }

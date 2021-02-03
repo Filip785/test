@@ -24,8 +24,7 @@ class DB
 
             self::$pdo = $dbh;
         } catch (\PDOException $e) {
-            echo "Error!: " . $e->getMessage() . "<br/>";
-            die();
+            dd('Failed to connect to database: ' . $e->getMessage());
         }
     }
 

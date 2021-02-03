@@ -1,12 +1,19 @@
-<?php $hasFlash = isset($successFlash);?>
+<?php $hasSuccessFlash = isset($success_msg); $hasErrorFlash = isset($error_msg); ?>
 
-<?php if($hasFlash) { ?>
+<?php if($hasSuccessFlash) { ?>
     <div id="flash" class="flash success">
-        <p><?= $successFlash ?></p>
+        <p><?= $success_msg ?></p>
     </div>
 <?php } ?>
 
-<a href="/products" class="<?= $hasFlash ? 'has-flash' : '' ?>">Products page</a>
+<?php if($hasErrorFlash) { ?>
+    <div id="flash" class="flash error">
+        <p><?= $error_msg ?></p>
+    </div>
+<?php } ?>
+
+
+<a href="/products" class="<?= ($hasSuccessFlash || $hasErrorFlash) ? 'has-flash' : '' ?>">Products page</a>
 <h1>Welcome, <?= $user['username'] ?></h1>
 
 <div class="comments">

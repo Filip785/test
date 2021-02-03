@@ -1,8 +1,8 @@
-<?php $hasValues = isset($commentValues); $hasFlash = isset($successFlash);?>
+<?php $hasValues = isset($commentValues); $hasFlash = isset($success_msg);?>
 
 <?php if($hasFlash) { ?>
     <div id="flash" class="flash success">
-        <p><?= $successFlash ?></p>
+        <p><?= $success_msg ?></p>
     </div>
 <?php } ?>
 

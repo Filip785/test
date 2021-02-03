@@ -29,12 +29,15 @@ class Flash
 
     public static function get()
     {
-        $value = isset($_SESSION['success_msg']) ? 'success_msg' : 'error_msg';
+        $type = isset($_SESSION['success_msg']) ? 'success_msg' : 'error_msg';
 
-        $flashValue = $_SESSION[$value];
+        $flashValue = $_SESSION[$type];
 
-        unset($_SESSION[$value]);
+        unset($_SESSION[$type]);
 
-        return $flashValue;
+        return [
+            'type' => $type,
+            'value' => $flashValue
+        ];
     }
 }

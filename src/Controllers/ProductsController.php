@@ -27,7 +27,9 @@ class ProductsController extends BaseController
         }
 
         if (Flash::has()) {
-            $this->setViewVar('successFlash', Flash::get());
+            $flash = Flash::get();
+
+            $this->setViewVar($flash['type'], $flash['value']);
         }
 
         $this->render();

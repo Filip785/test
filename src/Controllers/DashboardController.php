@@ -23,7 +23,9 @@ class DashboardController extends BaseController
         $this->setViewVar('comments', $comments);
 
         if (Flash::has()) {
-            $this->setViewVar('successFlash', Flash::get());
+            $flash = Flash::get();
+
+            $this->setViewVar($flash['type'], $flash['value']);
         }
 
         $this->render();
@@ -45,7 +47,9 @@ class DashboardController extends BaseController
         }
 
         if (Flash::has()) {
-            $this->setViewVar('errorFlash', Flash::get());
+            $flash = Flash::get();
+
+            $this->setViewVar($flash['type'], $flash['value']);
         }
 
         $this->render();

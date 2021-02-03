@@ -41,6 +41,15 @@ class CommentsController extends BaseController
             $this->redirect('/dashboard/login');
         }
 
+        $comment = DB::table('comments')->get($comment_id);
+
+        if (!$comment) {
+            Flash::error('That comment does not exist.');
+            $this->redirect('/dashboard');
+
+            return;
+        }
+
         DB::table('comments')->updateWhere(['id' => $comment_id], ['is_allowed' => 1]);
 
         $this->redirect('/dashboard');
@@ -50,6 +59,15 @@ class CommentsController extends BaseController
     {
         if (!Authorize::verify()) {
             $this->redirect('/dashboard/login');
+        }
+
+        $comment = DB::table('comments')->get($comment_id);
+
+        if (!$comment) {
+            Flash::error('That comment does not exist.');
+            $this->redirect('/dashboard');
+
+            return;
         }
 
         DB::table('comments')->delete($comment_id);

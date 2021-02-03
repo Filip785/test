@@ -25,6 +25,21 @@ class TableHelpers
         return "$propNames VALUES $valueQuestions";
     }
 
+    public static function getUpdateStr($args)
+    {
+        $statement = '';
+
+        foreach ($args as $k => $arg) {
+            $statement .= $k . ' = ?';
+
+            if (!($k === array_key_last($args))) {
+                $statement .= ',';
+            }
+        }
+
+        return $statement;
+    }
+
     public static function getWhereStr($args)
     {
         $statement = '';

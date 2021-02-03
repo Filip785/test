@@ -12,6 +12,8 @@ $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->addRoute('POST', '/dashboard/doLogin', 'DashboardController@doLogin');
 
     $r->addRoute('POST', '/comments/create', 'CommentsController@create');
+    $r->addRoute('POST', '/comments/allow/{comment_id:\d+}', 'CommentsController@allow');
+    $r->addRoute('POST', '/comments/disallow/{comment_id:\d+}', 'CommentsController@disallow');
 
     // list all products
     $r->addRoute('GET', '/products', 'ProductsController@index');

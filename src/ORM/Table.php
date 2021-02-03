@@ -43,6 +43,25 @@ class Table
         return $result;
     }
 
+    public function updateWhere($whereCond, $updateCond)
+    {
+        $whereStr = TableHelpers::getWhereStr($whereCond);
+        $updateStr = TableHelpers::getUpdateStr($updateCond);
+
+        $query = self::$pdo->prepare("UPDATE `" . $this->tableName . "` SET $updateStr WHERE $whereStr");
+        $query->execute(array_merge(
+            array_values($updateCond),
+            array_values($whereCond)
+        ));
+    }
+
+    public function delete($id)
+    {
+
+        $query = self::$pdo->prepare("DELETE FROM `" . $this->tableName . "` WHERE id = ?");
+        $query->execute([$id]);
+    }
+
     public function get($id)
     {
         $query = self::$pdo->prepare("SELECT * FROM `" . $this->tableName . "` WHERE id = ?");

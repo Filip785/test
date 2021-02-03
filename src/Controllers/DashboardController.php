@@ -13,9 +13,13 @@ class DashboardController extends BaseController
     {
         if (!Authorize::verify()) {
             $this->redirect('/dashboard/login');
+            return;
         }
 
+        $comments = DB::table('comments')->where(['is_allowed' => 0]);
+
         $this->setViewVar('user', $_SESSION['user']);
+        $this->setViewVar('comments', $comments);
 
         $this->render();
     }

@@ -14,6 +14,7 @@ class Authorize
     public static function login($user)
     {
         session_start();
+
         $_SESSION['user'] = [
             'id' => $user['id'],
             'username' => $user['username']

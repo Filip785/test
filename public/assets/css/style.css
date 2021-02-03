@@ -10,6 +10,11 @@ h1.main-title {
     text-align: center;
 }
 
+.has-flash {
+    display: block;
+    margin-top: 35px;
+}
+
 .row {
     display: flex;
     justify-content: center;
@@ -104,6 +109,31 @@ h1.main-title {
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+.flash {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 35px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.flash p {
+    margin: 0;
+}
+
+.flash.success {
+    background-color: greenyellow;
+}
+
+.flash.error {
+    background-color: red;
+    color: #fff;
 }
 
 @media screen and (max-width: 992px) {

@@ -6,6 +6,7 @@ use Filip785\MVC\Controllers\BaseController;
 use Filip785\MVC\Validator\Validator;
 use Filip785\MVC\ORM\DB;
 use Filip785\MVC\Helpers\Authorize;
+use Filip785\MVC\Helpers\Flash;
 
 class DashboardController extends BaseController
 {
@@ -20,6 +21,10 @@ class DashboardController extends BaseController
 
         $this->setViewVar('user', $_SESSION['user']);
         $this->setViewVar('comments', $comments);
+
+        if (Flash::has()) {
+            $this->setViewVar('successFlash', Flash::get());
+        }
 
         $this->render();
     }
@@ -37,6 +42,10 @@ class DashboardController extends BaseController
             if ($this->hasValues()) {
                 $this->setViewVar('loginValues', $this->getValues());
             }
+        }
+
+        if (Flash::has()) {
+            $this->setViewVar('errorFlash', Flash::get());
         }
 
         $this->render();
@@ -63,6 +72,8 @@ class DashboardController extends BaseController
 
         if (!isset($user[0])) {
             $this->setError('bad_login', 'Could not find that username/password.');
+            Flash::error('Incorrect credentials...');
+            $this->setValues($_POST);
             $this->redirect('/dashboard/login');
 
             return;
@@ -70,12 +81,15 @@ class DashboardController extends BaseController
 
         if (!password_verify($_POST['password'], $user[0]['password'])) {
             $this->setError('bad_login', 'Could not find that username/password.');
+            Flash::error('Incorrect credentials...');
+            $this->setValues($_POST);
             $this->redirect('/dashboard/login');
 
             return;
         }
 
         Authorize::login($user[0]);
+        Flash::success('Successfully logged in. Now you can approve/deny comments...');
 
         $this->redirect('/dashboard');
     }

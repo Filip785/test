@@ -1,4 +1,12 @@
-<a href="/products">Products page</a>
+<?php $hasFlash = isset($successFlash);?>
+
+<?php if($hasFlash) { ?>
+    <div id="flash" class="flash success">
+        <p><?= $successFlash ?></p>
+    </div>
+<?php } ?>
+
+<a href="/products" class="<?= $hasFlash ? 'has-flash' : '' ?>">Products page</a>
 <h1>Welcome, <?= $user['username'] ?></h1>
 
 <div class="comments">

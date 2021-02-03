@@ -5,6 +5,7 @@ namespace Filip785\MVC\Controllers;
 use Filip785\MVC\Controllers\BaseController;
 use Filip785\MVC\ORM\DB;
 use Filip785\MVC\Models\Product;
+use Filip785\MVC\Helpers\Flash;
 
 class ProductsController extends BaseController
 {
@@ -23,6 +24,10 @@ class ProductsController extends BaseController
             if ($this->hasValues()) {
                 $this->setViewVar('commentValues', $this->getValues());
             }
+        }
+
+        if (Flash::has()) {
+            $this->setViewVar('successFlash', Flash::get());
         }
 
         $this->render();

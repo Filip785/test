@@ -19,8 +19,6 @@ abstract class BaseController
 
     private function generateBaseHTML(string $viewPath)
     {
-        ob_start();
-
         extract($this->viewVars);
         require($this->baseDir . '../Views/base.template.php');
 

@@ -1,7 +1,13 @@
-<?php $hasErrors = isset($loginErrors); $hasLoginValues = isset($loginValues); ?>
+<?php $hasErrors = isset($loginErrors); $hasLoginValues = isset($loginValues); $hasFlash = isset($errorFlash); ?>
+
+<?php if($hasFlash) { ?>
+    <div id="flash" class="flash error">
+        <p><?= $errorFlash ?></p>
+    </div>
+<?php } ?>
 
 <form action="/dashboard/doLogin" method="POST" class="login-form">
-    <a href="/products">Products Page</a>
+    <a href="/products" class="<?= $hasFlash ? 'has-flash' : '' ?>">Products Page</a>
     <h1>Enter your admin username and password</h1>
     <div class="form-group">
         <label for="username">Username:</label>

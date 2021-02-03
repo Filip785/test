@@ -6,6 +6,7 @@ use Filip785\MVC\Controllers\BaseController;
 use Filip785\MVC\Validator\Validator;
 use Filip785\MVC\ORM\DB;
 use Filip785\MVC\Helpers\Authorize;
+use Filip785\MVC\Helpers\Flash;
 
 class CommentsController extends BaseController
 {
@@ -29,6 +30,7 @@ class CommentsController extends BaseController
 
         // populate the database
         DB::table('comments')->create($_POST);
+        Flash::success('Comment added. Awaiting admin approval...');
 
         $this->redirect('/products');
     }

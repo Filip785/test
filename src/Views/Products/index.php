@@ -1,6 +1,12 @@
-<?php $hasValues = isset($commentValues); ?>
+<?php $hasValues = isset($commentValues); $hasFlash = isset($successFlash);?>
 
-<a href="/dashboard/login">Dashboard</a>
+<?php if($hasFlash) { ?>
+    <div id="flash" class="flash success">
+        <p><?= $successFlash ?></p>
+    </div>
+<?php } ?>
+
+<a href="/dashboard/login" class="<?= $hasFlash ? 'has-flash' : '' ?>">Dashboard</a>
 <h1 class="main-title"><?= $title ?></h1>
 
 <div class="base-products">

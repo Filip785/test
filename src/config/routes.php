@@ -6,6 +6,11 @@ use FastRoute\RouteCollector;
 $dispatcher = FastRoute\simpleDispatcher(function (RouteCollector $r) {
     $r->addRoute('GET', '/', 'HomeController@index');
 
+    $r->addRoute('GET', '/dashboard', 'DashboardController@index');
+    $r->addRoute('GET', '/dashboard/login', 'DashboardController@login');
+    $r->addRoute('GET', '/dashboard/logout', 'DashboardController@logout');
+    $r->addRoute('POST', '/dashboard/doLogin', 'DashboardController@doLogin');
+
     $r->addRoute('POST', '/comments/create', 'CommentsController@create');
 
     // list all products

@@ -56,6 +56,27 @@ if($tableCreationComments->execute()) {
     echo 'Failed to create comments table.' . PHP_EOL;
 }
 
+$tableDropUsers = $pdoInstance->prepare('DROP TABLE IF EXISTS `users`');
+
+if($tableDropUsers->execute()) {
+    echo 'Users table dropped.' . PHP_EOL;
+} else {
+    echo 'Failed to drop users table.' . PHP_EOL;
+}
+
+$tableCreationUsers = $pdoInstance->prepare('CREATE TABLE `users` (
+    `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `username` varchar(255) NOT NULL,
+    `password` varchar(255) NOT NULL
+  )
+');
+
+if($tableCreationUsers->execute()) {
+    echo 'Users table created.' . PHP_EOL;
+} else {
+    echo 'Failed to create users table.' . PHP_EOL;
+}
+
 DB::table('products')->create(['image' => '/assets/images/citrus1.jpg', 'title' => 'Citrus Juice 1', 'description' => 'Very nice citrus juice 1!']);
 DB::table('products')->create(['image' => '/assets/images/citrus2.jpeg', 'title' => 'Citrus Juice 2', 'description' => 'Very nice citrus juice2 !']);
 DB::table('products')->create(['image' => '/assets/images/citrus3.jpg', 'title' => 'Citrus Juice 3', 'description' => 'Very nice citrus juice! 3']);
@@ -65,3 +86,5 @@ DB::table('products')->create(['image' => '/assets/images/orange1.jpg', 'title' 
 DB::table('products')->create(['image' => '/assets/images/orange2.jpg', 'title' => 'Orange Juice 2', 'description' => 'Very nice orange juice 2!']);
 DB::table('products')->create(['image' => '/assets/images/orange3.jpg', 'title' => 'Orange Juice 3', 'description' => 'Very nice orange juice 3!']);
 DB::table('products')->create(['image' => '/assets/images/orange4.jpg', 'title' => 'Orange Juice 4', 'description' => 'Very nice orange juice 4!']);
+
+DB::table('users')->create(['username' => 'admin', 'password' => password_hash('admin123', PASSWORD_DEFAULT)]);

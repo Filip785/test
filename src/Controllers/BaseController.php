@@ -55,9 +55,23 @@ abstract class BaseController
         header("Location: $path");
     }
 
-    protected function hasErrors()
+    protected function setErrors($key, $value)
     {
         session_start();
+
+        if (!isset($_SESSION['errors'])) {
+            $_SESSION['errors'] = [];
+        }
+
+        $_SESSION['errors'][$key] = $value;
+    }
+
+    protected function hasErrors()
+    {
+        if (session_id() === '') {
+            session_start();
+        }
+
         return isset($_SESSION['errors']);
     }
 

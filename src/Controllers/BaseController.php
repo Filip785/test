@@ -55,7 +55,7 @@ abstract class BaseController
         header("Location: $path");
     }
 
-    protected function setErrors($key, $value)
+    protected function setError($key, $value)
     {
         session_start();
 
@@ -64,6 +64,13 @@ abstract class BaseController
         }
 
         $_SESSION['errors'][$key] = $value;
+    }
+
+    protected function setErrors($errors)
+    {
+        session_start();
+
+        $_SESSION['errors'] = $errors;
     }
 
     protected function hasErrors()

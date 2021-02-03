@@ -42,27 +42,29 @@ class DashboardController extends BaseController
     {
         $validator = new Validator();
 
-        $validationResult = $validator->validate($_POST, [
+        $validator->validate($_POST, [
             'username' => 'required',
             'password' => 'required'
         ]);
 
-        if (!$validationResult) {
+        if (count($validator->getErrors()) > 0) {
+            $this->setErrors($validator->getErrors());
             $this->redirect('/dashboard/login');
+
             return;
         }
 
         $user = DB::table('users')->where(['username' => $_POST['username']]);
 
         if (!isset($user[0])) {
-            $this->setErrors('bad_login', 'Could not find that username/password.');
+            $this->setError('bad_login', 'Could not find that username/password.');
             $this->redirect('/dashboard/login');
 
             return;
         }
 
         if (!password_verify($_POST['password'], $user[0]['password'])) {
-            $this->setErrors('bad_login', 'Could not find that username/password.');
+            $this->setError('bad_login', 'Could not find that username/password.');
             $this->redirect('/dashboard/login');
 
             return;

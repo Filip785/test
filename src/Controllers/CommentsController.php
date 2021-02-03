@@ -13,14 +13,16 @@ class CommentsController extends BaseController
     {
         $validator = new Validator();
 
-        $validationResult = $validator->validate($_POST, [
+        $validator->validate($_POST, [
             'email' => 'required|email',
             'name' => 'required',
             'message' => 'required'
         ]);
 
-        if (!$validationResult) {
+        if (count($validator->getErrors()) > 0) {
+            $this->setErrors($validator->getErrors());
             $this->redirect('/products');
+
             return;
         }
 

@@ -4,28 +4,28 @@ namespace Filip785\MVC\Validator;
 
 class Validator
 {
+    private $errors = [];
+
     public function validate($args, $rules)
     {
-        // foreach ($rules as $key => $rule) {
-        //     $ruleList = explode('|', $rule);
-        //     $dataValue = $args[$key];
-        //     dd($dataValue, $key, $ruleList);
-        //}
+        foreach ($rules as $key => $rule) {
+            $ruleList = explode('|', $rule);
+            $dataValue = $args[$key];
 
-        //dd($args, $rules);
+            foreach ($ruleList as $rule) {
+                $ruleInstance = ValidatorFactory::create($rule, $key);
+                $result = $ruleInstance->run($args[$key]);
 
-        //$this->sendErrors();
-
-        return true;
+                if (!$result) {
+                    $this->errors[$key] = $ruleInstance->getMessage();
+                    break;
+                }
+            }
+        }
     }
 
-    private function sendErrors()
+    public function getErrors()
     {
-        session_start();
-        $_SESSION['errors'] = [
-            'name' => 'Please enter your name.',
-            'email' => 'Please enter your email.',
-            'message' => 'Please enter your message.'
-        ];
+        return $this->errors;
     }
 }

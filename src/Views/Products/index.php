@@ -1,3 +1,4 @@
+<a href="/dashboard/login">Dashboard</a>
 <h1><?= $title ?></h1>
 
 <div class="base-products">

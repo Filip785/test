@@ -1,3 +1,4 @@
+<a href="/products">Products page</a>
 <h1>Welcome, <?= $user['username'] ?></h1>
 
 <div class="comments">

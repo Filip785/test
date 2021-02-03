@@ -21,6 +21,7 @@ class CommentsController extends BaseController
 
         if (count($validator->getErrors()) > 0) {
             $this->setErrors($validator->getErrors());
+            $this->setValues($_POST);
             $this->redirect('/products');
 
             return;

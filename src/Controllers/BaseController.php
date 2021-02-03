@@ -73,6 +73,21 @@ abstract class BaseController
         $_SESSION['errors'] = $errors;
     }
 
+    protected function setValues($values)
+    {
+        $_SESSION['values'] = $values;
+    }
+
+    protected function hasValues()
+    {
+        return isset($_SESSION['values']);
+    }
+
+    protected function getValues()
+    {
+        return $_SESSION['values'];
+    }
+
     protected function hasErrors()
     {
         if (session_id() === '') {

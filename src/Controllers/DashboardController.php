@@ -33,6 +33,10 @@ class DashboardController extends BaseController
 
         if ($this->hasErrors()) {
             $this->setViewVar('loginErrors', $this->getErrors());
+
+            if ($this->hasValues()) {
+                $this->setViewVar('loginValues', $this->getValues());
+            }
         }
 
         $this->render();
@@ -49,6 +53,7 @@ class DashboardController extends BaseController
 
         if (count($validator->getErrors()) > 0) {
             $this->setErrors($validator->getErrors());
+            $this->setValues($_POST);
             $this->redirect('/dashboard/login');
 
             return;

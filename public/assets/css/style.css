@@ -2,7 +2,20 @@ html, body {
     height: 100%;
 }
 
+h1, h2, h3, p, label, span, a {
+    font-family: Arial;
+}
+
+h1.main-title {
+    text-align: center;
+}
+
 .row {
+    display: flex;
+    justify-content: center;
+}
+
+.base-products {
     display: flex;
     justify-content: center;
 }
@@ -44,7 +57,63 @@ html, body {
     justify-content: center;
 }
 
+.comments-form {
+    padding-bottom: 30px;
+}
+
 .comments {
     flex-direction: column;
     align-items: center;
+}
+
+.comments-wrapper, .comments-form form {
+    width: 1000px;
+}
+
+.form-group {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+.input-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group:not(:last-child) {
+    margin-bottom: 25px;
+}
+
+.error-container {
+    margin-top: 25px;
+}
+
+.error-container.single {
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.error-container span {
+    color: red;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+@media screen and (max-width: 992px) {
+    .row {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 1020px) {
+    .comments-wrapper, .comments-form form {
+        width: 100%;
+    }
 }

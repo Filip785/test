@@ -1,12 +1,11 @@
-<?php $hasErrors = isset($loginErrors); ?>
+<?php $hasErrors = isset($loginErrors); $hasLoginValues = isset($loginValues); ?>
 
-<a href="/products">Products Page</a>
-<h1>Enter your admin username and password</h1>
-
-<form action="/dashboard/doLogin" method="POST">
+<form action="/dashboard/doLogin" method="POST" class="login-form">
+    <a href="/products">Products Page</a>
+    <h1>Enter your admin username and password</h1>
     <div class="form-group">
         <label for="username">Username:</label>
-        <input type="text" name="username" id="username">
+        <input type="text" name="username" id="username" value="<?= $hasLoginValues ? $loginValues['username'] : '' ?>">
 
         <?php if($hasErrors) { ?>
             <?php if(isset($loginErrors['username'])) { ?>
@@ -18,7 +17,8 @@
     </div>
     <div class="form-group">
         <label for="password">Password</label>  
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" <?= $hasLoginValues ? $loginValues['password'] : '' ?>>
+
         <?php if($hasErrors) { ?>
             <?php if(isset($loginErrors['password'])) { ?>
                 <div class="error-container">
@@ -30,7 +30,7 @@
     <div class="form-group">
         <?php if($hasErrors) { ?>
             <?php if(isset($loginErrors['bad_login'])) { ?>
-                <div class="error-container">
+                <div class="error-container single">
                     <span><?= $loginErrors['bad_login'] ?></span>
                 </div>
             <?php } ?>

@@ -19,6 +19,10 @@ class ProductsController extends BaseController
 
         if ($this->hasErrors()) {
             $this->setViewVar('commentErrors', $this->getErrors());
+
+            if ($this->hasValues()) {
+                $this->setViewVar('commentValues', $this->getValues());
+            }
         }
 
         $this->render();
